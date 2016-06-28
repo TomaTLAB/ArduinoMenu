@@ -37,7 +37,7 @@ UTFT library from:
     	uint16_t bgColor=VGA_BLACK,
     	uint16_t enabledColor=VGA_WHITE,
     	uint16_t disabledColor=VGA_SILVER,
-			uint16_t editCursorColoe=VGA_RED
+			uint16_t editCursorColor=VGA_RED
     )
 	  	:gfx(tft),
 	  	bgColor(bgColor),
@@ -52,7 +52,7 @@ UTFT library from:
   	 void init() {
   	   //setup geometry
        resX=gfx.getFontXsize();
-       resY=gfx.getFontYsize();
+       resY=gfx.getFontYsize()+5;
        maxX=gfx.getDisplayXSize()/resX;
        maxY=gfx.getDisplayYSize()/resY;
   	 }
@@ -83,6 +83,10 @@ UTFT library from:
 	  }
     virtual size_t write(uint8_t ch) {
       switch(ch) {
+      case 0xD0://Unicode
+        break;
+      case 0xD1://Unicode
+        break;
       case 0x0D://NL
         curX=0;
         break;
