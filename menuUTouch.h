@@ -42,7 +42,7 @@ public:
       startX=touch.getX()-menuNode::activeNode->ox;
       if (startX>out.maxX*out.resX) return -1;
       int y=touch.getY()-menuNode::activeNode->oy;
-      if (y<0||y>out.maxY*out.resY) return -1;
+      if (y<0||y>(out.maxY+1)*out.resY) return -1;
       //within menu box
       if (touching) {//might be dragging
         int d=scrlY-y;
@@ -64,7 +64,7 @@ public:
       touching=false;//touch ending
       if (dragging) return -1;
       if (menuNode::activeNode->isMenu()) {
-        int at=startY/out.resY;
+        int at=startY/out.resY-1;
         return (at>=0&&at<(m.canExit?m.sz+1:m.sz))?(m.canExit&&at==m.sz?'0':at+out.top+'1'):-1;
       } else {//then its some sort of field
         menuNode* a=menuNode::activeNode;

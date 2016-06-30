@@ -52,7 +52,7 @@ UTFT library from:
   	 void init() {
   	   //setup geometry
        resX=gfx.getFontXsize();
-       resY=gfx.getFontYsize()+5;
+       resY=gfx.getFontYsize()+2;
        maxX=gfx.getDisplayXSize()/resX;
        maxY=gfx.getDisplayYSize()/resY;
   	 }
@@ -126,14 +126,27 @@ UTFT library from:
 			if (drawn!=&m) clear();//clear screen box when changing menu
 			if (m.sel-top>=maxY) top=m.sel-maxY+1;//selected option outside device (bottom)
 			else if (m.sel<top) top=m.sel;//selected option outside device (top)
-			int i=top;for(;i<m.sz;i++) {
+			  if (needRedraw(m,top)) { //draw caption
+			  	gfx.setColor(enabledColor);
+			    	gfx.fillRect(
+			    	  menuNode::activeNode->ox,
+			    	  menuNode::activeNode->oy,
+			    	  menuNode::activeNode->ox+maxX*resX-1,
+			    	  menuNode::activeNode->oy+resY-1
+			    	);
+			  	gfx.setColor(hiliteColor);
+			  	gfx.setBackColor(enabledColor);
+    	                        gfx.print(m.text,menuNode::activeNode->ox,menuNode::activeNode->oy);
+				}
+//				printPrompt("11111",true,0,top,m.width);}
+			int i=top; for(;i<m.sz;i++) {
 			  if(i-top>=maxY) break;
 			  if (needRedraw(m,i)) {
-			  	printPrompt(*m.data[i],i==m.sel,i+1,i-top,m.width);
+			  	printPrompt(*m.data[i],i==m.sel,i+1,i-top+1,m.width);
 			  }
 			}
 			if (drawExit&&i-top<maxY&&needRedraw(m,i))
-				printPrompt(menu::exitOption,m.sel==m.sz,0,i-top,m.width);
+				printPrompt(menu::exitOption,m.sel==m.sz,0,i-top+1,m.width);
 			lastTop=top;
 			lastSel=m.sel;
 			drawn=&m;
