@@ -138,11 +138,10 @@ UTFT library from:
 			  	gfx.setBackColor(enabledColor);
     	                        gfx.print(m.text,menuNode::activeNode->ox,menuNode::activeNode->oy);
 				}
-//				printPrompt("11111",true,0,top,m.width);}
 			int i=top; for(;i<m.sz;i++) {
 			  if(i-top>=maxY) break;
 			  if (needRedraw(m,i)) {
-			  	printPrompt(*m.data[i],i==m.sel,i+1,i-top+1,m.width);
+			  	printPrompt(*m.data[i],i==m.sel,i,i-top+1,m.width);
 			  }
 			}
 			if (drawExit&&i-top<maxY&&needRedraw(m,i))

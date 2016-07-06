@@ -21,9 +21,9 @@ public:
   quadEncoder(int a,int b):pinA(a),pinB(b) {}
   void begin() {
     pinMode(pinA, INPUT);
-    digitalWrite(pinA,1);
+    digitalWrite(pinA, HIGH);
     pinMode(pinB, INPUT);
-    digitalWrite(pinB,1);
+    digitalWrite(pinB, HIGH);
   }
 };
 

@@ -35,12 +35,14 @@ int menu::menuKeys(menuOut &p,Stream& c,bool canExit) {
     if (ch==menu::downCode) {
       if (sel>0) {
         sel--;
-        if (sel+1>=p.maxY) p.top=sel-p.maxY;
+        if (sel<p.top) p.top--;
+//        if (sel+1>=p.maxY) p.top=sel-p.maxY;
       }
     } else if (ch==menu::upCode) {
       if (sel<(sz-(canExit?0:1))) {
         sel++;
-        if ((sz-sel+(canExit?1:0))>=p.maxY) p.top=sel-(canExit?1:0);
+        if (sel>p.top+p.maxY) p.top++;
+//        if ((sz-sel+(canExit?1:0))>=p.maxY) p.top=sel-(canExit?1:0);
       }
     } else if (ch==menu::escCode) {
     	op=-1;
